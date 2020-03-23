@@ -57,6 +57,7 @@ clear all
 %%
 % After downloading the data from GitHub, unzip the file in your temporary directory.
 tempdir = 'C:\Users\eshchekinova\Documents\BoknisData\GoogleClass';
+dirSpectro = 'C:\Users\eshchekinova\Documents\BoknisData\GoogleClass\SpectroBoknisData';
 %load(fullfile(tempdir,'FiguresDataBoknis','DataBoknis.mat'))
 %load(fullfile(tempdir,'SpectroBoknisData_v1','BoknisDataSpectro.mat'))
 load(fullfile(tempdir,'SpectroBoknisData','BoknisDataSpectro.mat'))
@@ -76,7 +77,7 @@ load(fullfile(tempdir,'SpectroBoknisData','BoknisDataSpectro.mat'))
 % another directory where you have write permission. You can find the
 % source code for this helper function in the Supporting Functions section
 % at the end of this example.
-parentDir = tempdir;
+parentDir = dirSpectro;
 dataDir = 'SpectroBoknisData';
 helperCreateDirectories(BoknisDataSpectro,parentDir,dataDir)
 % dataDir = 'FiguresDataBoknis';

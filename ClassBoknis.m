@@ -23,15 +23,18 @@ DataM=BoknisDataSpectro;
 
 %helperPlotReps(BoknisDataSpectro)
 %helperCreateRGBfromTF_v0(new_time_sec,BoknisDataSpectro,parentDir,dataDir)
-helperCreateRGBfromTF_Spectro(new_time_sec,BoknisDataSpectro,parentDir,dataDir)
-%helperCreateRGBfromTF(new_time_sec,DataBoknis,parentDir,dataDir)
 %helperCreateRGBfromTF_Spectro(new_time_sec,BoknisDataSpectro,parentDir,dataDir)
+%helperCreateRGBfromTF(new_time_sec,BoknisDataSpectro,parentDir,dataDir)
+%helperCreateRGBfromTF_Spectro(new_time_sec,BoknisDataSpectro,parentDir,dataDir)
+cd(currdir);
+
 
 %clear all
 % %% Plot the sequence and calculated scores
 %addpath('C:\Users\eshchekinova\Documents\BoknisData\SpectroBoknisData_v1');
 addpath('C:\Users\eshchekinova\Documents\BoknisData\GoogleClass\SpectroBoknisData');
 addpath('C:\Users\eshchekinova\Documents\BoknisData\GoogleClass\Networks');
+dirFigures = 'C:\Users\eshchekinova\Documents\BoknisData\GoogleClass\SpectroBoknisData\SpectroBoknisData';
 %addpath('C:\Users\eshchekinova\Documents\BoknisData\FiguresBoknisData');
 %load DataBoknis
 load UpdateBoknis
@@ -94,12 +97,12 @@ label_Y_GN=zeros(length(DataM.Data(:,1,1)),1);
 label_Y_AN=zeros(length(DataM.Data(:,1,1)),1);
 for i=1:length(DataM.Data(:,1,1))
     if (indNevent(k1)==ind(i))&&(k1<length(indNevent))
-      imgClassNameGN=imread(strcat(tempdir,'\NEVENT\','NEVENT_',num2str(i),'.jpg'));
-      imgClassNameAN=imread(strcat(tempdir,'\NEVENT\','NEVENT_',num2str(i),'.jpg'));
+      imgClassNameGN=imread(strcat(dirFigures,'\NEVENT\','NEVENT_',num2str(i),'.jpg'));
+      imgClassNameAN=imread(strcat(dirFigures,'\NEVENT\','NEVENT_',num2str(i),'.jpg'));
       k1=k1+1;
     elseif (indYevent(k2)==ind(i))&&(k2<length(indYevent))
-      imgClassNameGN=imread(strcat(tempdir,'\EVENT\','EVENT_',num2str(i),'.jpg'));
-      imgClassNameAN=imread(strcat(tempdir,'\EVENT\','EVENT_',num2str(i),'.jpg'));
+      imgClassNameGN=imread(strcat(dirFigures,'\EVENT\','EVENT_',num2str(i),'.jpg'));
+      imgClassNameAN=imread(strcat(dirFigures,'\EVENT\','EVENT_',num2str(i),'.jpg'));
       k2=k2+1;
     end;  
 % figure
@@ -145,30 +148,33 @@ seqProbGN(:,i)=interp1(tt,seqScoresGN(:,i),new_time_sec);
 end; 
 seq_Y_AN=interp1(tt,label_Y_AN,new_time_sec);
  seq_Y_GN=interp1(tt,label_Y_GN,new_time_sec);
-xOxy=interp1(new_time_sec,X(:,2),tt);
-xPress=interp1(new_time_sec,X(:,1),tt);
+ 'X'
+ size(X)
+xOxy=interp1(new_time_sec,X(:,1),tt);
+%xPress=interp1(new_time_sec,X(:,1),tt);
 figure;
-subplot(3,1,1);
-X(1,4)=NaN;
-seqProbAN1(1)=NaN;
-X(end,4)=NaN;
-seqProbAN1(end)=NaN;
-patch(new_time_sec,X(:,4),seqProbAN(:,1)*100,'EdgeColor','interp','Marker','.','MarkerFaceColor','flat');
-title('Oxygen');
-xlim([new_time_sec(1) new_time_sec(end)]);
-ylim([-0.01 0.02]);
+% subplot(2,1,1);
+% %X(1,4)=NaN;
+% seqProbAN1(1)=NaN;
+% %X(end,4)=NaN;
+% seqProbAN1(end)=NaN;
+% patch(new_time_sec,X(:,1),seqProbAN(:,1)*100,'EdgeColor','interp','Marker','.','MarkerFaceColor','flat');
+% title('Oxygen');
+% xlim([new_time_sec(1) new_time_sec(end)]);
+% ylim([-0.01 0.02]);
 subplot(2,1,1);
-plot(new_time_sec,X(:,3),'LineWidth',1,'Color','r');
+plot(new_time_sec,X(:,1),'LineWidth',1,'Color','r');
 num_events=21;
  for i=1:num_events
  xx = [Xstart_sec(i) Xend_sec(i) Xend_sec(i) Xstart_sec(i)];
- yy = [-0.025 -0.025 0.015 0.015];
+
+ yy = [-1 -1 1 1];
  patch(xx,yy,[0.3 0. 0.8])
  alpha(.1)
  end;
-title('Temperature');
+%title('Temperature');
 xlim([new_time_sec(1) new_time_sec(end)]);
-ylim([-0.025 0.015]);
+ylim([-1 1]);
 subplot(2,1,2);
 %plot(tt,seqScoresGN(:,1)*100,'r','LineWidth',3);
 %hold on;

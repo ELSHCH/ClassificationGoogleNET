@@ -23,7 +23,6 @@ Fs=1/delT;
 % cwt(xrec,'FilterBank',fb);
 
 r = size(data,1);
-
 for ii = 1:r
 %    % cfs = abs(fb.wt(data(ii,:)));
 %     cfs = abs(fb.wt(xrec));
@@ -51,7 +50,7 @@ for ii = 1:r
     imshow(im)
 
     imgLoc = fullfile(imageRoot,char(labels(ii)));
-    imFileName = strcat(char(labels(ii)),'_',num2str(ii),'.jpg');
+    imFileName = strcat(char(labels(ii)),'_',num2str(ii),'.jpg')
     imwrite(imresize(im,[224 224]),fullfile(imgLoc,imFileName));
 end
 end
